@@ -2,20 +2,14 @@
 import { useState, useEffect } from "react";
 
 //Firestore
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  setDoc,
-  addDoc,
-} from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../config/firestore";
 import { useRouter } from "next/navigation";
-import { logOut, logIn } from "@/lib/features/auth-slices";
-import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/lib/store";
 
-export default function MyWallet({ logged }) {
+export default function MyWallet() {
+  const logged = useAppSelector((state): string => state["value"]["username"]);
+
   const router = useRouter();
 
   let [moveUser, setMoveUser] = useState(false);
