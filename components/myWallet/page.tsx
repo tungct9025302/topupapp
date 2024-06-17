@@ -17,7 +17,7 @@ import { useDispatch } from "react-redux";
 
 export default function MyWallet({ logged }) {
   const router = useRouter();
-  const dispatch = useDispatch();
+
   let [moveUser, setMoveUser] = useState(false);
   let [movePW, setMovePW] = useState(false);
   let [inputtedUsername, setInputtedUsername] = useState(false);
@@ -37,7 +37,7 @@ export default function MyWallet({ logged }) {
         setLoading(false);
       }, 1000);
     }
-  }, []);
+  }, [logged, router]);
 
   function handleSubmit() {
     setLoading(true);
