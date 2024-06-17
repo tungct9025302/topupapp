@@ -22,11 +22,11 @@ const config: Config = {
       keyframes: {
         down: {
           "0%": {},
-          "100%": { bottom: 0.5 },
+          "100%": { bottom: "0.5" },
         },
         fadeOut: {
-          "0%": { opacity: 0 },
-          "100%": { opacity: 1 },
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
       },
     },
