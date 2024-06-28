@@ -31,6 +31,8 @@ export default function MyWallet() {
         setLoading(false);
       }, 1000);
     }
+
+    loadBalance();
   }, [logged, router]);
 
   function handleSubmit() {
@@ -60,6 +62,13 @@ export default function MyWallet() {
     }
   };
 
+  const loadBalance = async () => {
+    const userRef = doc(db, "accounts", logged);
+    const docSnap = await getDoc(userRef);
+    const curBalance = docSnap.get("balance");
+    setBalance(curBalance);
+  };
+
   const updateBalance = async (priceToAdd) => {
     const newBalance = balance + priceToAdd;
     await setDoc(
@@ -70,8 +79,8 @@ export default function MyWallet() {
   };
 
   async function checkExistData(inputted_seri, inputted_passcode) {
-    const userRef = doc(db, "cards", inputted_seri);
-    const docSnap = await getDoc(userRef);
+    const cardRef = doc(db, "cards", inputted_seri);
+    const docSnap = await getDoc(cardRef);
     const passcode = docSnap.get("passcode");
     const valid = docSnap.get("valid");
 
@@ -83,8 +92,8 @@ export default function MyWallet() {
   }
 
   async function getPrice(inputted_seri) {
-    const userRef = doc(db, "cards", inputted_seri);
-    const docSnap = await getDoc(userRef);
+    const cardRef = doc(db, "cards", inputted_seri);
+    const docSnap = await getDoc(cardRef);
     const price = docSnap.get("price");
 
     if (price) {
